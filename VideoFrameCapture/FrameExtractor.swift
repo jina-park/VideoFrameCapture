@@ -1,6 +1,7 @@
 import Foundation
 import AVFoundation
 import CoreGraphics
+import ImageIO
 
 class FrameExtractor: ObservableObject {
     private(set) var imageGenerator: AVAssetImageGenerator?
@@ -40,6 +41,9 @@ class FrameExtractor: ObservableObject {
             modDate = d
         }
 
+        let metadata = try await asset.load(.metadata)
+        let gpsProperties = await Self.extractGPS(from: metadata)
+
         let generator = AVAssetImageGenerator(asset: asset)
         generator.appliesPreferredTrackTransform = true
         generator.requestedTimeToleranceBefore = .zero
@@ -55,8 +59,53 @@ class FrameExtractor: ObservableObject {
             resolution: resolution,
             frameRate: frameRate,
             duration: duration,
-            fileModificationDate: modDate
+            fileModificationDate: modDate,
+            gpsProperties: gpsProperties
         )
+    }
+
+    // MARK: GPS extraction
+
+    private static func extractGPS(from metadata: [AVMetadataItem]) async -> [String: Any]? {
+        // iPhone .mov: QuickTime metadata space 우선, common space 폴백
+        let candidates = AVMetadataItem.metadataItems(
+            from: metadata,
+            filteredByIdentifier: .quickTimeMetadataLocationISO6709
+        ) + AVMetadataItem.metadataItems(
+            from: metadata,
+            filteredByIdentifier: .commonIdentifierLocation
+        )
+
+        for item in candidates {
+            guard let str = try? await item.load(.stringValue) else { continue }
+            if let gps = parseISO6709(str) { return gps }
+        }
+        return nil
+    }
+
+    // ISO 6709 예: "+37.3331-122.0090+080/"
+    private static func parseISO6709(_ string: String) -> [String: Any]? {
+        // 부호 포함 숫자 시퀀스 추출
+        let pattern = #"[+-]\d+(?:\.\d+)?"#
+        guard let regex = try? NSRegularExpression(pattern: pattern) else { return nil }
+        let ns = string as NSString
+        let matches = regex.matches(in: string, range: NSRange(location: 0, length: ns.length))
+        let values = matches.compactMap { Double(ns.substring(with: $0.range)) }
+        guard values.count >= 2 else { return nil }
+
+        let lat = values[0], lon = values[1]
+        var gps: [String: Any] = [
+            kCGImagePropertyGPSLatitude as String:    abs(lat),
+            kCGImagePropertyGPSLatitudeRef as String: lat >= 0 ? "N" : "S",
+            kCGImagePropertyGPSLongitude as String:   abs(lon),
+            kCGImagePropertyGPSLongitudeRef as String: lon >= 0 ? "E" : "W"
+        ]
+        if values.count >= 3 {
+            let alt = values[2]
+            gps[kCGImagePropertyGPSAltitude as String]    = abs(alt)
+            gps[kCGImagePropertyGPSAltitudeRef as String] = alt >= 0 ? 0 : 1
+        }
+        return gps
     }
 
     func extractFrame(at time: CMTime) async throws -> CGImage {

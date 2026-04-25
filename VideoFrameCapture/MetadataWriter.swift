@@ -16,11 +16,12 @@ enum MetadataWriterError: LocalizedError {
 }
 
 struct MetadataWriter {
-    /// JPEG data with EXIF date set to (videoModificationDate + frameTimestamp seconds).
+    /// JPEG data with EXIF date and GPS copied from the source video.
     static func createJPEGData(
         from cgImage: CGImage,
         videoModificationDate: Date,
-        frameTimestamp: Double
+        frameTimestamp: Double,
+        gpsProperties: [String: Any]? = nil
     ) throws -> Data {
         let captureDate = videoModificationDate.addingTimeInterval(frameTimestamp)
 
@@ -30,7 +31,7 @@ struct MetadataWriter {
         fmt.timeZone = TimeZone.current
         let dateString = fmt.string(from: captureDate)
 
-        let properties: [String: Any] = [
+        var properties: [String: Any] = [
             kCGImageDestinationLossyCompressionQuality as String: 1.0,
             kCGImagePropertyExifDictionary as String: [
                 kCGImagePropertyExifDateTimeOriginal as String: dateString,
@@ -40,6 +41,10 @@ struct MetadataWriter {
                 kCGImagePropertyTIFFDateTime as String: dateString
             ] as [String: Any]
         ]
+
+        if let gps = gpsProperties {
+            properties[kCGImagePropertyGPSDictionary as String] = gps
+        }
 
         let data = NSMutableData()
         guard let dest = CGImageDestinationCreateWithData(

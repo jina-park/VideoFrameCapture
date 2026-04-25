@@ -10,6 +10,7 @@ struct VideoInfo {
     let frameRate: Float
     let duration: CMTime
     let fileModificationDate: Date
+    let gpsProperties: [String: Any]?
 
     var durationSeconds: Double {
         CMTimeGetSeconds(duration)
