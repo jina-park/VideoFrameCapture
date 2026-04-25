@@ -201,7 +201,8 @@ final class VideoPlayerViewModel: ObservableObject {
                 from: cgImage,
                 videoModificationDate: info.fileModificationDate,
                 frameTimestamp: frameTimestamp,
-                gpsProperties: info.gpsProperties
+                gpsProperties: info.gpsProperties,
+                timezoneOffset: info.timezoneOffset
             )
             try await PhotoSaver.save(imageData: data, fileName: fileName)
             saveResult = "저장됨: \(fileName).jpg\n시각: \(info.formatTime(seconds: frameTimestamp))"

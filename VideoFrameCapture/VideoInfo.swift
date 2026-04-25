@@ -11,6 +11,7 @@ struct VideoInfo {
     let duration: CMTime
     let fileModificationDate: Date
     let gpsProperties: [String: Any]?
+    let timezoneOffset: String?   // "+09:00" 형식, 동영상 creationdate에서 추출
 
     var durationSeconds: Double {
         CMTimeGetSeconds(duration)

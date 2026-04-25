@@ -42,7 +42,8 @@ class FrameExtractor: ObservableObject {
         }
 
         let metadata = try await asset.load(.metadata)
-        let gpsProperties = await Self.extractGPS(from: metadata)
+        let gpsProperties    = await Self.extractGPS(from: metadata)
+        let timezoneOffset   = await Self.extractTimezoneOffset(from: metadata)
 
         let generator = AVAssetImageGenerator(asset: asset)
         generator.appliesPreferredTrackTransform = true
@@ -60,8 +61,41 @@ class FrameExtractor: ObservableObject {
             frameRate: frameRate,
             duration: duration,
             fileModificationDate: modDate,
-            gpsProperties: gpsProperties
+            gpsProperties: gpsProperties,
+            timezoneOffset: timezoneOffset
         )
+    }
+
+    // MARK: Timezone extraction
+
+    private static func extractTimezoneOffset(from metadata: [AVMetadataItem]) async -> String? {
+        // quickTimeMetadata 우선, common 폴백 (GoPro·Insta360도 QT 메타데이터 사용)
+        let identifiers: [AVMetadataIdentifier] = [
+            .quickTimeMetadataCreationDate,
+            .commonIdentifierCreationDate
+        ]
+        for id in identifiers {
+            let items = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: id)
+            for item in items {
+                guard let str = try? await item.load(.stringValue) else { continue }
+                if let offset = parseTimezoneOffset(from: str) { return offset }
+            }
+        }
+        return nil
+    }
+
+    // ISO 8601 문자열에서 오프셋 추출: "2024-01-15T15:00:00+09:00" → "+09:00"
+    private static func parseTimezoneOffset(from isoString: String) -> String? {
+        if isoString.hasSuffix("Z") { return "+00:00" }
+        let pattern = #"([+-]\d{2}):?(\d{2})$"#
+        guard let regex = try? NSRegularExpression(pattern: pattern),
+              let match = regex.firstMatch(in: isoString,
+                                           range: NSRange(isoString.startIndex..., in: isoString))
+        else { return nil }
+        let ns = isoString as NSString
+        let h  = ns.substring(with: match.range(at: 1))
+        let m  = ns.substring(with: match.range(at: 2))
+        return "\(h):\(m)"
     }
 
     // MARK: GPS extraction
