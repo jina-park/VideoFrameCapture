@@ -26,24 +26,44 @@ targets:
       - path: VideoFrameCapture
         excludes:
           - "**/*.plist"
+          - "**/*.entitlements"
     resources:
       - path: VideoFrameCapture/Assets.xcassets
+    dependencies:
+      - target: VideoFrameCaptureShareExtension
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.videoframecapture.VideoFrameCapture
         INFOPLIST_FILE: VideoFrameCapture/Info.plist
+        CODE_SIGN_ENTITLEMENTS: VideoFrameCapture/VideoFrameCapture.entitlements
         SUPPORTS_MACCATALYST: YES
         DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER: YES
         CODE_SIGN_STYLE: Automatic
         DEVELOPMENT_TEAM: ""
-    info:
-      path: VideoFrameCapture/Info.plist
+
+  VideoFrameCaptureShareExtension:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: ShareExtension
+        excludes:
+          - "**/*.plist"
+          - "**/*.entitlements"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.videoframecapture.VideoFrameCapture.ShareExtension
+        INFOPLIST_FILE: ShareExtension/Info.plist
+        CODE_SIGN_ENTITLEMENTS: ShareExtension/ShareExtension.entitlements
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""
 
 schemes:
   VideoFrameCapture:
     build:
       targets:
         VideoFrameCapture: all
+        VideoFrameCaptureShareExtension: all
     run:
       config: Debug
     test:

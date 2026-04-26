@@ -63,6 +63,12 @@ struct VideoInfo {
     }
 
     func captureFileName(for frameNumber: Int64) -> String {
-        "\(fileNameWithoutExtension)_\(String(format: "%06d", frameNumber))"
+        if fileNameWithoutExtension.contains("ProjectEditData") {
+            let fmt = DateFormatter()
+            fmt.dateFormat = "yyyyMMddHHmmss"
+            let dateStr = fmt.string(from: fileModificationDate)
+            return "X5_\(dateStr)_\(String(format: "%06d", frameNumber))"
+        }
+        return "\(fileNameWithoutExtension)_\(String(format: "%06d", frameNumber))"
     }
 }

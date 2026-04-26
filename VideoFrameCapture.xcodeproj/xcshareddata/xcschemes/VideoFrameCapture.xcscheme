@@ -21,6 +21,20 @@
                ReferencedContainer = "container:VideoFrameCapture.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C8179961A091FEF909FD79AC"
+               BuildableName = "VideoFrameCaptureShareExtension.appex"
+               BlueprintName = "VideoFrameCaptureShareExtension"
+               ReferencedContainer = "container:VideoFrameCapture.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

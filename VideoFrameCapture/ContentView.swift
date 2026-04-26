@@ -48,6 +48,8 @@ struct VideoFile: Transferable {
 // MARK: - ContentView
 
 struct ContentView: View {
+    @EnvironmentObject private var appState: AppState
+
     @State private var navigationPath: [URL] = []
     @State private var photosPickerItem: PhotosPickerItem?
     @State private var showDocumentPicker = false
@@ -67,6 +69,12 @@ struct ContentView: View {
                             }
                         }
                 }
+        }
+        // 외부 공유(공유 시트)로 받은 영상 자동 이동
+        .onChange(of: appState.pendingVideoURL) { url in
+            guard let url else { return }
+            navigationPath = [url]
+            appState.pendingVideoURL = nil
         }
         // PhotosPicker item handler
         .onChange(of: photosPickerItem) { newItem in

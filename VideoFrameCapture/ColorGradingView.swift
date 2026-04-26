@@ -145,7 +145,7 @@ struct ColorGradingView: View {
         VStack(alignment: .leading, spacing: 10) {
             sectionHeader("기본 조정")
 
-            sliderRow("노출",   $model.exposure,   -2...2,    default: 0)
+            sliderRow("노출",   $model.exposure,   -0.3...0.3, default: 0)
             sliderRow("대비",   $model.contrast,   0.5...1.5, default: 1)
             sliderRow("채도",   $model.saturation, 0...2,     default: 1)
             sliderRow("선명도", $model.sharpness,  0...1,     default: 0)
@@ -169,6 +169,13 @@ struct ColorGradingView: View {
 
             Slider(value: binding, in: range)
                 .tint(Color(white: 0.75))
+                .simultaneousGesture(
+                    TapGesture(count: 2).onEnded {
+                        withAnimation(.spring(response: 0.2)) {
+                            binding.wrappedValue = defaultValue
+                        }
+                    }
+                )
 
             // 값 표시 — 탭하면 기본값 초기화
             Text(sliderLabel(binding.wrappedValue, default: defaultValue))

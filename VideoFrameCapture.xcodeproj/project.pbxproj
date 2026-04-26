@@ -8,10 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		07279A484F86D7C1B6669A59 /* VideoFrameCaptureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D999762875ADB7BFD63B207E /* VideoFrameCaptureApp.swift */; };
+		375C350439B071670EAE4BAD /* VideoFrameCaptureShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F732FDBCCC8955F0ADE645EC /* VideoFrameCaptureShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		48838E00AA7E2231DB490506 /* ColorWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE87646715E880C73F19A477 /* ColorWheelView.swift */; };
 		55AC85B69AEED314CCEC7F4A /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA75ECC5445B66FC5FFB2704 /* DocumentPicker.swift */; };
 		58EDEEFBDD4D3228789F3E30 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8023515B5DAA928F29265A1 /* ContentView.swift */; };
 		7B181E685879F3B0902079CE /* FrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF703F8D50824904A2FE9A5F /* FrameExtractor.swift */; };
+		93E4ADB502D16AAB8DA5191B /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C053CF15BC7391E8D9B63AF1 /* AppState.swift */; };
+		9C6217E9FE73848A6B476D3C /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF8473DA7078949D250CA92 /* ShareViewController.swift */; };
 		B5736C542BB2CD53552B6EA1 /* MetadataWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0125955ECC87F796BD29094F /* MetadataWriter.swift */; };
 		CCE0E7C016BA3C44FAFC8774 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4C2480B81762146D7AD496 /* Assets.xcassets */; };
 		D07A76E79C145DA833419269 /* ColorGradingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC418017BA1042626C8855C /* ColorGradingModel.swift */; };
@@ -22,6 +25,30 @@
 		FED90B72E470F82237428DB2 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE0414DD17F2D2E457357E1 /* VideoPlayerView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		AF8CB5FC7C0743BB2D61D900 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E88EB54372E4C294EF7AFF83 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C8179961A091FEF909FD79AC;
+			remoteInfo = VideoFrameCaptureShareExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B5DD7115655F894832714DBF /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				375C350439B071670EAE4BAD /* VideoFrameCaptureShareExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0125955ECC87F796BD29094F /* MetadataWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataWriter.swift; sourceTree = "<group>"; };
 		1B0DA50B6858EB80E7F11037 /* ColorGradingProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGradingProcessor.swift; sourceTree = "<group>"; };
@@ -29,12 +56,15 @@
 		5130CA42176CE69D71F4CF08 /* ColorGradingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGradingView.swift; sourceTree = "<group>"; };
 		5C4C2480B81762146D7AD496 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DE0414DD17F2D2E457357E1 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
-		60ABFFC55D088FDA30EC4FF2 /* VideoFrameCapture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoFrameCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		60ABFFC55D088FDA30EC4FF2 /* VideoFrameCapture.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = VideoFrameCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FF8473DA7078949D250CA92 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		AA75ECC5445B66FC5FFB2704 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		AE87646715E880C73F19A477 /* ColorWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWheelView.swift; sourceTree = "<group>"; };
 		BF703F8D50824904A2FE9A5F /* FrameExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameExtractor.swift; sourceTree = "<group>"; };
+		C053CF15BC7391E8D9B63AF1 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		D999762875ADB7BFD63B207E /* VideoFrameCaptureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFrameCaptureApp.swift; sourceTree = "<group>"; };
 		E3260B92005A8ECFBABC6333 /* PhotoSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSaver.swift; sourceTree = "<group>"; };
+		F732FDBCCC8955F0ADE645EC /* VideoFrameCaptureShareExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = VideoFrameCaptureShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8023515B5DAA928F29265A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FEC418017BA1042626C8855C /* ColorGradingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGradingModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -43,6 +73,7 @@
 		1E74041D3CF804B4310713DF /* VideoFrameCapture */ = {
 			isa = PBXGroup;
 			children = (
+				C053CF15BC7391E8D9B63AF1 /* AppState.swift */,
 				5C4C2480B81762146D7AD496 /* Assets.xcassets */,
 				FEC418017BA1042626C8855C /* ColorGradingModel.swift */,
 				1B0DA50B6858EB80E7F11037 /* ColorGradingProcessor.swift */,
@@ -63,15 +94,25 @@
 		A7A41172F1E527546D52BB47 = {
 			isa = PBXGroup;
 			children = (
+				B95313251036FBAFF955F118 /* ShareExtension */,
 				1E74041D3CF804B4310713DF /* VideoFrameCapture */,
 				C11D571A131E30A0C47F04EE /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		B95313251036FBAFF955F118 /* ShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				9FF8473DA7078949D250CA92 /* ShareViewController.swift */,
+			);
+			path = ShareExtension;
 			sourceTree = "<group>";
 		};
 		C11D571A131E30A0C47F04EE /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				60ABFFC55D088FDA30EC4FF2 /* VideoFrameCapture.app */,
+				F732FDBCCC8955F0ADE645EC /* VideoFrameCaptureShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,10 +126,12 @@
 			buildPhases = (
 				38847323CA08855D306A698D /* Sources */,
 				0789343C0092484E9E7C534E /* Resources */,
+				B5DD7115655F894832714DBF /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				78FA1D86F8268810E2F2B7B8 /* PBXTargetDependency */,
 			);
 			name = VideoFrameCapture;
 			packageProductDependencies = (
@@ -96,6 +139,23 @@
 			productName = VideoFrameCapture;
 			productReference = 60ABFFC55D088FDA30EC4FF2 /* VideoFrameCapture.app */;
 			productType = "com.apple.product-type.application";
+		};
+		C8179961A091FEF909FD79AC /* VideoFrameCaptureShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B1A514F79451B5CDED397C4 /* Build configuration list for PBXNativeTarget "VideoFrameCaptureShareExtension" */;
+			buildPhases = (
+				AE8FB8A548A45600E33A3BB7 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VideoFrameCaptureShareExtension;
+			packageProductDependencies = (
+			);
+			productName = VideoFrameCaptureShareExtension;
+			productReference = F732FDBCCC8955F0ADE645EC /* VideoFrameCaptureShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -107,6 +167,11 @@
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					10CCFCAEDD6B3101F1987CCC = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					C8179961A091FEF909FD79AC = {
+						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -126,6 +191,7 @@
 			projectRoot = "";
 			targets = (
 				10CCFCAEDD6B3101F1987CCC /* VideoFrameCapture */,
+				C8179961A091FEF909FD79AC /* VideoFrameCaptureShareExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -146,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93E4ADB502D16AAB8DA5191B /* AppState.swift in Sources */,
 				D07A76E79C145DA833419269 /* ColorGradingModel.swift in Sources */,
 				E53515102CE0DCAC0860DFFA /* ColorGradingProcessor.swift in Sources */,
 				FAB9825906860FE2E1012064 /* ColorGradingView.swift in Sources */,
@@ -161,17 +228,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AE8FB8A548A45600E33A3BB7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C6217E9FE73848A6B476D3C /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		78FA1D86F8268810E2F2B7B8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C8179961A091FEF909FD79AC /* VideoFrameCaptureShareExtension */;
+			targetProxy = AF8CB5FC7C0743BB2D61D900 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		12D795CE8230A5CE30330F99 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = VideoFrameCapture/VideoFrameCapture.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = 63SZ2G25TJ;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = VideoFrameCapture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -257,10 +341,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = VideoFrameCapture/VideoFrameCapture.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = 63SZ2G25TJ;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = VideoFrameCapture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -335,6 +420,44 @@
 			};
 			name = Release;
 		};
+		82C6E3DAED956DBB32AA0EC5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.videoframecapture.VideoFrameCapture.ShareExtension;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CD73F059095D5CF486D16727 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.videoframecapture.VideoFrameCapture.ShareExtension;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -343,6 +466,15 @@
 			buildConfigurations = (
 				1601354A39D5D1F094D79BA4 /* Debug */,
 				5756624D839E56376CD47AB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7B1A514F79451B5CDED397C4 /* Build configuration list for PBXNativeTarget "VideoFrameCaptureShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82C6E3DAED956DBB32AA0EC5 /* Debug */,
+				CD73F059095D5CF486D16727 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
