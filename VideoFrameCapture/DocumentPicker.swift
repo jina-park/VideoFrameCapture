@@ -31,9 +31,11 @@ struct DocumentPicker: UIViewControllerRepresentable {
             // Copy to a temp location so we have persistent access without
             // holding the security scope open for the entire session.
             let dest = FileManager.default.temporaryDirectory
-                .appendingPathComponent(UUID().uuidString + "_" + url.lastPathComponent)
+                .appendingPathComponent(UUID().uuidString + "/" + url.lastPathComponent)
 
             do {
+                try FileManager.default.createDirectory(at: dest.deletingLastPathComponent(),
+                                                        withIntermediateDirectories: true)
                 try FileManager.default.copyItem(at: url, to: dest)
                 onPick(dest)
             } catch {

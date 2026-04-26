@@ -13,7 +13,9 @@ struct VideoFile: Transferable {
         } importing: { received in
             print("[DEBUG] Transferable importing: \(received.file)")
             let dest = FileManager.default.temporaryDirectory
-                .appendingPathComponent(UUID().uuidString + "_" + received.file.lastPathComponent)
+                .appendingPathComponent(UUID().uuidString + "/" + received.file.lastPathComponent)
+            try FileManager.default.createDirectory(at: dest.deletingLastPathComponent(),
+                                                    withIntermediateDirectories: true)
             try FileManager.default.copyItem(at: received.file, to: dest)
             print("[DEBUG] 복사 완료: \(dest)")
             return VideoFile(url: dest)
@@ -23,7 +25,9 @@ struct VideoFile: Transferable {
         } importing: { received in
             print("[DEBUG] Transferable(video) importing: \(received.file)")
             let dest = FileManager.default.temporaryDirectory
-                .appendingPathComponent(UUID().uuidString + "_" + received.file.lastPathComponent)
+                .appendingPathComponent(UUID().uuidString + "/" + received.file.lastPathComponent)
+            try FileManager.default.createDirectory(at: dest.deletingLastPathComponent(),
+                                                    withIntermediateDirectories: true)
             try FileManager.default.copyItem(at: received.file, to: dest)
             return VideoFile(url: dest)
         }
@@ -32,7 +36,9 @@ struct VideoFile: Transferable {
         } importing: { received in
             print("[DEBUG] Transferable(audiovisual) importing: \(received.file)")
             let dest = FileManager.default.temporaryDirectory
-                .appendingPathComponent(UUID().uuidString + "_" + received.file.lastPathComponent)
+                .appendingPathComponent(UUID().uuidString + "/" + received.file.lastPathComponent)
+            try FileManager.default.createDirectory(at: dest.deletingLastPathComponent(),
+                                                    withIntermediateDirectories: true)
             try FileManager.default.copyItem(at: received.file, to: dest)
             return VideoFile(url: dest)
         }
