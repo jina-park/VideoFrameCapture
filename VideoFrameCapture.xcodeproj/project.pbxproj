@@ -29,7 +29,7 @@
 		5130CA42176CE69D71F4CF08 /* ColorGradingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGradingView.swift; sourceTree = "<group>"; };
 		5C4C2480B81762146D7AD496 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DE0414DD17F2D2E457357E1 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
-		60ABFFC55D088FDA30EC4FF2 /* VideoFrameCapture.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = VideoFrameCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		60ABFFC55D088FDA30EC4FF2 /* VideoFrameCapture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoFrameCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA75ECC5445B66FC5FFB2704 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		AE87646715E880C73F19A477 /* ColorWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWheelView.swift; sourceTree = "<group>"; };
 		BF703F8D50824904A2FE9A5F /* FrameExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameExtractor.swift; sourceTree = "<group>"; };
@@ -107,7 +107,6 @@
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					10CCFCAEDD6B3101F1987CCC = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -172,7 +171,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 63SZ2G25TJ;
 				INFOPLIST_FILE = VideoFrameCapture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -261,7 +260,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 63SZ2G25TJ;
 				INFOPLIST_FILE = VideoFrameCapture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
