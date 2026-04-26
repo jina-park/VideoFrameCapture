@@ -101,18 +101,28 @@ class FrameExtractor: ObservableObject {
     // MARK: GPS extraction
 
     private static func extractGPS(from metadata: [AVMetadataItem]) async -> [String: Any]? {
-        // iPhone .mov: QuickTime metadata space 우선, common space 폴백
-        let candidates = AVMetadataItem.metadataItems(
-            from: metadata,
-            filteredByIdentifier: .quickTimeMetadataLocationISO6709
-        ) + AVMetadataItem.metadataItems(
-            from: metadata,
-            filteredByIdentifier: .commonIdentifierLocation
-        )
+        // 시도 순서:
+        // 1) quickTimeMetadata ISO6709 (iPhone)
+        // 2) commonIdentifier location
+        // 3) QuickTime UserData ©xyz (일부 액션캠)
+        let candidates =
+            AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .quickTimeMetadataLocationISO6709) +
+            AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .commonIdentifierLocation) +
+            AVMetadataItem.metadataItems(from: metadata, withKey: "©xyz", keySpace: .quickTimeUserData)
 
         for item in candidates {
             guard let str = try? await item.load(.stringValue) else { continue }
+            print("[DEBUG GPS] 위치 문자열 발견: \(str)")
             if let gps = parseISO6709(str) { return gps }
+        }
+
+        // GPS를 찾지 못한 경우 — 전체 메타데이터 키를 출력하여 진단
+        print("[DEBUG GPS] GPS 추출 실패. 보유 메타데이터 키:")
+        for item in metadata {
+            let id = item.identifier?.rawValue ?? "nil"
+            let ks = item.keySpace?.rawValue ?? "nil"
+            let key = String(describing: item.key)
+            print("[DEBUG GPS]   identifier=\(id)  keySpace=\(ks)  key=\(key)")
         }
         return nil
     }
