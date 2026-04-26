@@ -188,8 +188,11 @@ final class VideoPlayerViewModel: ObservableObject {
 
     // MARK: Save
 
-    func saveCapture() async {
-        guard let info = videoInfo, let cgImage = capturedImage else { return }
+    /// overrideImage: 색보정된 이미지 전달 시 사용. nil 이면 capturedImage 저장.
+    func saveCapture(overrideImage: CGImage? = nil) async {
+        guard let info = videoInfo else { return }
+        let cgImage = overrideImage ?? capturedImage
+        guard let cgImage else { return }
         isSaving = true
         saveResult = nil
 
@@ -234,6 +237,7 @@ private struct CapturePreviewSheet: View {
     let timestamp: String
     let isSaving: Bool
     let onSave: () -> Void
+    let onColorGrade: () -> Void
     let onCancel: () -> Void
 
     var body: some View {
@@ -253,21 +257,32 @@ private struct CapturePreviewSheet: View {
                         .foregroundStyle(.secondary)
                 }
 
-                HStack(spacing: 20) {
-                    Button("취소", role: .cancel, action: onCancel)
-                        .buttonStyle(.bordered)
-                        .disabled(isSaving)
-
-                    Button(action: onSave) {
-                        if isSaving {
-                            ProgressView().tint(.white)
-                        } else {
-                            Label("사진 앱에 저장", systemImage: "square.and.arrow.down")
-                        }
+                VStack(spacing: 10) {
+                    Button(action: onColorGrade) {
+                        Label("색보정", systemImage: "wand.and.stars")
+                            .frame(maxWidth: .infinity)
                     }
-                    .buttonStyle(.borderedProminent)
+                    .buttonStyle(.bordered)
+                    .controlSize(.large)
                     .disabled(isSaving)
+
+                    HStack(spacing: 12) {
+                        Button("취소", role: .cancel, action: onCancel)
+                            .buttonStyle(.bordered)
+                            .disabled(isSaving)
+
+                        Button(action: onSave) {
+                            if isSaving {
+                                ProgressView().tint(.white)
+                            } else {
+                                Label("사진 앱에 저장", systemImage: "square.and.arrow.down")
+                            }
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .disabled(isSaving)
+                    }
                 }
+                .padding(.horizontal)
                 .padding(.bottom)
             }
             .navigationTitle("캡쳐 미리보기")
@@ -284,6 +299,7 @@ struct VideoPlayerView: View {
     @StateObject private var vm = VideoPlayerViewModel()
     @State private var isDragging = false
     @State private var dragFrame: Double = 0
+    @State private var showColorGrading = false
 
     var body: some View {
         Group {
@@ -324,12 +340,24 @@ struct VideoPlayerView: View {
                     timestamp: info.formatTime(seconds: ts),
                     isSaving: vm.isSaving,
                     onSave: { Task { await vm.saveCapture() } },
+                    onColorGrade: {
+                        vm.showCapturePreview = false
+                        showColorGrading = true
+                    },
                     onCancel: {
                         vm.showCapturePreview = false
                         vm.capturedImage = nil
                     }
                 )
                 .presentationDetents([.medium, .large])
+            }
+        }
+        // Color grading sheet
+        .fullScreenCover(isPresented: $showColorGrading) {
+            if let img = vm.capturedImage {
+                ColorGradingView(originalImage: img) { gradedImage in
+                    Task { await vm.saveCapture(overrideImage: gradedImage) }
+                }
             }
         }
         // Save success toast
